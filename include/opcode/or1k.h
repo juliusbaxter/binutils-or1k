@@ -22,8 +22,8 @@
 /* We treat all letters the same in encode/decode routines so
    we need to assign some characteristics to them like signess etc.  */
 
-#ifndef OR32_H_ISA
-#define OR32_H_ISA
+#ifndef OR1K_H_ISA
+#define OR1K_H_ISA
 
 #define NUM_UNSIGNED (0)
 #define NUM_SIGNED (1)
@@ -34,11 +34,11 @@
 
 #define OPERAND_DELIM (',')
 
-#define OR32_IF_DELAY (1)
-#define OR32_W_FLAG   (2)
-#define OR32_R_FLAG   (4)
+#define OR1K_IF_DELAY (1)
+#define OR1K_W_FLAG   (2)
+#define OR1K_R_FLAG   (4)
 
-struct or32_letter
+struct or1k_letter
 {
   char letter;
   int  sign;
@@ -46,7 +46,7 @@ struct or32_letter
 };
 
 /* Main instruction specification array.  */
-struct or32_opcode
+struct or1k_opcode
 {
   /* Name of the instruction.  */
   char *name;
@@ -144,13 +144,13 @@ extern void l_cust4   (void);
 #endif
 extern void l_none    (void);
 
-extern const struct or32_letter or32_letters[];
+extern const struct or1k_letter or1k_letters[];
 
-extern const struct  or32_opcode or32_opcodes[];
+extern const struct  or1k_opcode or1k_opcodes[];
 
-extern const unsigned int or32_num_opcodes;
+extern const unsigned int or1k_num_opcodes;
 
-/* Calculates instruction length in bytes.  Always 4 for OR32.  */
+/* Calculates instruction length in bytes.  Always 4 for OR1K.  */
 extern int insn_len (int);
 
 /* Is individual insn's operand signed or unsigned?  */
@@ -165,7 +165,7 @@ extern int insn_index (char *);
 /* MM: Returns instruction name from index.  */
 extern const char *insn_name (int);
 
-/* MM: Constructs new FSM, based on or32_opcodes.  */ 
+/* MM: Constructs new FSM, based on or1k_opcodes.  */ 
 extern void build_automata (void);
 
 /* MM: Destructs FSM.  */ 

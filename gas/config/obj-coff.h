@@ -77,9 +77,9 @@
 #endif
 #endif
 
-#ifdef TC_OR32
-#include "coff/or32.h"
-#define TARGET_FORMAT "coff-or32-big"
+#ifdef TC_OR1K
+#include "coff/or1k.h"
+#define TARGET_FORMAT "coff-or1k-big"
 #endif
 
 #ifdef TC_I960

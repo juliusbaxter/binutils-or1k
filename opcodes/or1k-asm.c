@@ -32,8 +32,8 @@
 #include "ansidecl.h"
 #include "bfd.h"
 #include "symcat.h"
-#include "openrisc-desc.h"
-#include "openrisc-opc.h"
+#include "or1k-desc.h"
+#include "or1k-opc.h"
 #include "opintl.h"
 #include "xregex.h"
 #include "libiberty.h"
@@ -56,7 +56,7 @@ static const char * MISSING_CLOSING_PARENTHESIS = N_("missing `)'");
 #define CGEN_VERBOSE_ASSEMBLER_ERRORS
 
 long
-openrisc_sign_extend_16bit (long value)
+or1k_sign_extend_16bit (long value)
 {
   return ((value & 0xffff) ^ 0x8000) - 0x8000;
 }
@@ -160,7 +160,7 @@ parse_lo16 (CGEN_CPU_DESC cd, const char ** strp, int opindex, long * valuep)
 
 /* -- */
 
-const char * openrisc_cgen_parse_operand
+const char * or1k_cgen_parse_operand
   (CGEN_CPU_DESC, int, const char **, CGEN_FIELDS *);
 
 /* Main entry point for operand parsing.
@@ -177,7 +177,7 @@ const char * openrisc_cgen_parse_operand
    the handlers.  */
 
 const char *
-openrisc_cgen_parse_operand (CGEN_CPU_DESC cd,
+or1k_cgen_parse_operand (CGEN_CPU_DESC cd,
 			   int opindex,
 			   const char ** strp,
 			   CGEN_FIELDS * fields)
@@ -188,52 +188,49 @@ openrisc_cgen_parse_operand (CGEN_CPU_DESC cd,
 
   switch (opindex)
     {
-    case OPENRISC_OPERAND_ABS_26 :
+    case OR1K_OPERAND_ABS_26 :
       {
         bfd_vma value = 0;
-        errmsg = cgen_parse_address (cd, strp, OPENRISC_OPERAND_ABS_26, 0, NULL,  & value);
+        errmsg = cgen_parse_address (cd, strp, OR1K_OPERAND_ABS_26, 0, NULL,  & value);
         fields->f_abs26 = value;
       }
       break;
-    case OPENRISC_OPERAND_DISP_26 :
+    case OR1K_OPERAND_DISP_26 :
       {
         bfd_vma value = 0;
-        errmsg = cgen_parse_address (cd, strp, OPENRISC_OPERAND_DISP_26, 0, NULL,  & value);
+        errmsg = cgen_parse_address (cd, strp, OR1K_OPERAND_DISP_26, 0, NULL,  & value);
         fields->f_disp26 = value;
       }
       break;
-    case OPENRISC_OPERAND_HI16 :
-      errmsg = parse_hi16 (cd, strp, OPENRISC_OPERAND_HI16, (long *) (& fields->f_simm16));
+    case OR1K_OPERAND_HI16 :
+      errmsg = parse_hi16 (cd, strp, OR1K_OPERAND_HI16, (long *) (& fields->f_simm16));
       break;
-    case OPENRISC_OPERAND_LO16 :
-      errmsg = parse_lo16 (cd, strp, OPENRISC_OPERAND_LO16, (long *) (& fields->f_lo16));
+    case OR1K_OPERAND_LO16 :
+      errmsg = parse_lo16 (cd, strp, OR1K_OPERAND_LO16, (long *) (& fields->f_lo16));
       break;
-    case OPENRISC_OPERAND_OP_F_23 :
-      errmsg = cgen_parse_unsigned_integer (cd, strp, OPENRISC_OPERAND_OP_F_23, (unsigned long *) (& fields->f_op4));
+    case OR1K_OPERAND_RA :
+      errmsg = cgen_parse_keyword (cd, strp, & or1k_cgen_opval_h_gr, & fields->f_r2);
       break;
-    case OPENRISC_OPERAND_OP_F_3 :
-      errmsg = cgen_parse_unsigned_integer (cd, strp, OPENRISC_OPERAND_OP_F_3, (unsigned long *) (& fields->f_op5));
+    case OR1K_OPERAND_RB :
+      errmsg = cgen_parse_keyword (cd, strp, & or1k_cgen_opval_h_gr, & fields->f_r3);
       break;
-    case OPENRISC_OPERAND_RA :
-      errmsg = cgen_parse_keyword (cd, strp, & openrisc_cgen_opval_h_gr, & fields->f_r2);
+    case OR1K_OPERAND_RD :
+      errmsg = cgen_parse_keyword (cd, strp, & or1k_cgen_opval_h_gr, & fields->f_r1);
       break;
-    case OPENRISC_OPERAND_RB :
-      errmsg = cgen_parse_keyword (cd, strp, & openrisc_cgen_opval_h_gr, & fields->f_r3);
+    case OR1K_OPERAND_SIMM_16 :
+      errmsg = cgen_parse_signed_integer (cd, strp, OR1K_OPERAND_SIMM_16, (long *) (& fields->f_simm16));
       break;
-    case OPENRISC_OPERAND_RD :
-      errmsg = cgen_parse_keyword (cd, strp, & openrisc_cgen_opval_h_gr, & fields->f_r1);
+    case OR1K_OPERAND_UI16NC :
+      errmsg = parse_lo16 (cd, strp, OR1K_OPERAND_UI16NC, (long *) (& fields->f_i16nc));
       break;
-    case OPENRISC_OPERAND_SIMM_16 :
-      errmsg = cgen_parse_signed_integer (cd, strp, OPENRISC_OPERAND_SIMM_16, (long *) (& fields->f_simm16));
+    case OR1K_OPERAND_UIMM_16 :
+      errmsg = cgen_parse_unsigned_integer (cd, strp, OR1K_OPERAND_UIMM_16, (unsigned long *) (& fields->f_uimm16));
       break;
-    case OPENRISC_OPERAND_UI16NC :
-      errmsg = parse_lo16 (cd, strp, OPENRISC_OPERAND_UI16NC, (long *) (& fields->f_i16nc));
+    case OR1K_OPERAND_UIMM_5 :
+      errmsg = cgen_parse_unsigned_integer (cd, strp, OR1K_OPERAND_UIMM_5, (unsigned long *) (& fields->f_uimm5));
       break;
-    case OPENRISC_OPERAND_UIMM_16 :
-      errmsg = cgen_parse_unsigned_integer (cd, strp, OPENRISC_OPERAND_UIMM_16, (unsigned long *) (& fields->f_uimm16));
-      break;
-    case OPENRISC_OPERAND_UIMM_5 :
-      errmsg = cgen_parse_unsigned_integer (cd, strp, OPENRISC_OPERAND_UIMM_5, (unsigned long *) (& fields->f_uimm5));
+    case OR1K_OPERAND_UIMM_6 :
+      errmsg = cgen_parse_unsigned_integer (cd, strp, OR1K_OPERAND_UIMM_6, (unsigned long *) (& fields->f_uimm6));
       break;
 
     default :
@@ -245,18 +242,18 @@ openrisc_cgen_parse_operand (CGEN_CPU_DESC cd,
   return errmsg;
 }
 
-cgen_parse_fn * const openrisc_cgen_parse_handlers[] = 
+cgen_parse_fn * const or1k_cgen_parse_handlers[] = 
 {
   parse_insn_normal,
 };
 
 void
-openrisc_cgen_init_asm (CGEN_CPU_DESC cd)
+or1k_cgen_init_asm (CGEN_CPU_DESC cd)
 {
-  openrisc_cgen_init_opcode_table (cd);
-  openrisc_cgen_init_ibld_table (cd);
-  cd->parse_handlers = & openrisc_cgen_parse_handlers[0];
-  cd->parse_operand = openrisc_cgen_parse_operand;
+  or1k_cgen_init_opcode_table (cd);
+  or1k_cgen_init_ibld_table (cd);
+  cd->parse_handlers = & or1k_cgen_parse_handlers[0];
+  cd->parse_operand = or1k_cgen_parse_operand;
 #ifdef CGEN_ASM_INIT_HOOK
 CGEN_ASM_INIT_HOOK
 #endif
@@ -271,12 +268,12 @@ CGEN_ASM_INIT_HOOK
    opcode) with the pattern '.*'
 
    It then compiles the regex and stores it in the opcode, for
-   later use by openrisc_cgen_assemble_insn
+   later use by or1k_cgen_assemble_insn
 
    Returns NULL for success, an error message for failure.  */
 
 char * 
-openrisc_cgen_build_insn_regex (CGEN_INSN *insn)
+or1k_cgen_build_insn_regex (CGEN_INSN *insn)
 {  
   CGEN_OPCODE *opc = (CGEN_OPCODE *) CGEN_INSN_OPCODE (insn);
   const char *mnem = CGEN_INSN_MNEMONIC (insn);
@@ -542,7 +539,7 @@ parse_insn_normal (CGEN_CPU_DESC cd,
    mind helps keep the design clean.  */
 
 const CGEN_INSN *
-openrisc_cgen_assemble_insn (CGEN_CPU_DESC cd,
+or1k_cgen_assemble_insn (CGEN_CPU_DESC cd,
 			   const char *str,
 			   CGEN_FIELDS *fields,
 			   CGEN_INSN_BYTES_PTR buf,
@@ -573,7 +570,7 @@ openrisc_cgen_assemble_insn (CGEN_CPU_DESC cd,
       /* Not usually needed as unsupported opcodes
 	 shouldn't be in the hash lists.  */
       /* Is this insn supported by the selected cpu?  */
-      if (! openrisc_cgen_insn_supported (cd, insn))
+      if (! or1k_cgen_insn_supported (cd, insn))
 	continue;
 #endif
       /* If the RELAXED attribute is set, this is an insn that shouldn't be

@@ -2077,10 +2077,10 @@ coff_set_arch_mach_hook (bfd *abfd, void * filehdr)
   machine = 0;
   switch (internal_f->f_magic)
     {
-#ifdef OR32_MAGIC_BIG
-    case OR32_MAGIC_BIG:
-    case OR32_MAGIC_LITTLE:
-      arch = bfd_arch_or32;
+#ifdef OR1K_MAGIC_BIG
+    case OR1K_MAGIC_BIG:
+    case OR1K_MAGIC_LITTLE:
+      arch = bfd_arch_or1k;
       break;
 #endif
 #ifdef PPCMAGIC
@@ -3049,12 +3049,12 @@ coff_set_flags (bfd * abfd,
       return TRUE;
 #endif
 
-#ifdef OR32_MAGIC_BIG
-    case bfd_arch_or32:
+#ifdef OR1K_MAGIC_BIG
+    case bfd_arch_or1k:
       if (bfd_big_endian (abfd))
-	* magicp = OR32_MAGIC_BIG;
+	* magicp = OR1K_MAGIC_BIG;
       else
-	* magicp = OR32_MAGIC_LITTLE;
+	* magicp = OR1K_MAGIC_LITTLE;
       return TRUE;
 #endif
 
@@ -4137,7 +4137,7 @@ coff_write_object_contents (bfd * abfd)
     internal_a.magic = MIPS_PE_MAGIC;
 #endif
 
-#ifdef OR32
+#ifdef OR1K
 #define __A_MAGIC_SET__
     internal_a.magic = NMAGIC; /* Assume separate i/d.  */
 #endif

@@ -13,8 +13,8 @@
 
 m4_ifndef([AC_AUTOCONF_VERSION],
   [m4_copy([m4_PACKAGE_VERSION], [AC_AUTOCONF_VERSION])])dnl
-m4_if(m4_defn([AC_AUTOCONF_VERSION]), [2.64],,
-[m4_warning([this file was generated for autoconf 2.64.
+m4_if(m4_defn([AC_AUTOCONF_VERSION]), [2.67],,
+[m4_warning([this file was generated for autoconf 2.67.
 You have another version of autoconf.  It may work, but is not guaranteed to.
 If you have problems, you may need to regenerate the build system entirely.
 To do so, use the procedure documented by the package, typically `autoreconf'.])])
@@ -979,11 +979,12 @@ m4_include([../config/plugins.m4])
 m4_include([../config/po.m4])
 m4_include([../config/progtest.m4])
 m4_include([../config/stdint.m4])
-m4_include([../libtool.m4])
-m4_include([../ltoptions.m4])
-m4_include([../ltsugar.m4])
-m4_include([../ltversion.m4])
 m4_include([../lt~obsolete.m4])
 m4_include([bfd.m4])
+m4_include([libtool.m4])
+m4_include([ltoptions.m4])
+m4_include([ltsugar.m4])
+m4_include([ltversion.m4])
+m4_include([lt~obsolete.m4])
 m4_include([warning.m4])
 m4_include([acinclude.m4])

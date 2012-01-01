@@ -552,6 +552,8 @@ case "${target}" in
     ;;
   mips*-*-linux*)
     ;;
+  or1k*-*-*)
+    ;;
   powerpc*-*-linux*)
     ;;
   powerpc-*-darwin*)

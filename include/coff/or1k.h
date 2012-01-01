@@ -20,8 +20,8 @@
    Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston,
    MA 02110-1301, USA.  */
 
-#ifndef OR32
-# define OR32
+#ifndef OR1K
+# define OR1K
 #endif
 
 /* File Header and related definitions.  */
@@ -46,12 +46,12 @@ struct external_filehdr
 #define SIPFBOMAGIC     0572    /* Am29000 (Byte 0 is MSB).  */
 #define SIPRBOMAGIC     0573    /* Am29000 (Byte 0 is LSB).  */
 
-#define OR32_MAGIC_BIG 		SIPFBOMAGIC	
-#define OR32_MAGIC_LITTLE	SIPRBOMAGIC	
-#define OR32BADMAG(x)     (((x).f_magic!=OR32_MAGIC_BIG) && \
-			                      ((x).f_magic!=OR32_MAGIC_LITTLE))
+#define OR1K_MAGIC_BIG 		SIPFBOMAGIC	
+#define OR1K_MAGIC_LITTLE	SIPRBOMAGIC	
+#define OR1KBADMAG(x)     (((x).f_magic!=OR1K_MAGIC_BIG) && \
+			                      ((x).f_magic!=OR1K_MAGIC_LITTLE))
 
-#define OMAGIC OR32_MAGIC_BIG
+#define OMAGIC OR1K_MAGIC_BIG
 
 /* Optional (a.out) header.  */
 typedef	struct external_aouthdr 
