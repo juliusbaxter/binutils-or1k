@@ -48,15 +48,11 @@ static const CGEN_IFMT ifmt_empty ATTRIBUTE_UNUSED = {
 };
 
 static const CGEN_IFMT ifmt_l_j ATTRIBUTE_UNUSED = {
-  32, 32, 0xfc000000, { { F (F_OPCODE) }, { F (F_ABS26) }, { 0 } }
+  32, 32, 0xfc000000, { { F (F_OPCODE) }, { F (F_DISP26) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_l_jr ATTRIBUTE_UNUSED = {
   32, 32, 0xffff07ff, { { F (F_OPCODE) }, { F (F_RESV_25_10) }, { F (F_R3) }, { F (F_RESV_10_11) }, { 0 } }
-};
-
-static const CGEN_IFMT ifmt_l_bnf ATTRIBUTE_UNUSED = {
-  32, 32, 0xfc000000, { { F (F_OPCODE) }, { F (F_DISP26) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_l_trap ATTRIBUTE_UNUSED = {
@@ -134,16 +130,16 @@ static const CGEN_OPCODE or1k_cgen_insn_opcode_table[MAX_INSNS] =
      A `num' value of zero is thus invalid.
      Also, the special `invalid' insn resides here.  */
   { { 0, 0, 0, 0 }, {{0}}, 0, {0}},
-/* l.j ${abs-26} */
+/* l.j ${disp-26} */
   {
     { 0, 0, 0, 0 },
-    { { MNEM, ' ', OP (ABS_26), 0 } },
+    { { MNEM, ' ', OP (DISP_26), 0 } },
     & ifmt_l_j, { 0x0 }
   },
-/* l.jal ${abs-26} */
+/* l.jal ${disp-26} */
   {
     { 0, 0, 0, 0 },
-    { { MNEM, ' ', OP (ABS_26), 0 } },
+    { { MNEM, ' ', OP (DISP_26), 0 } },
     & ifmt_l_j, { 0x4000000 }
   },
 /* l.jr $rB */
@@ -162,13 +158,13 @@ static const CGEN_OPCODE or1k_cgen_insn_opcode_table[MAX_INSNS] =
   {
     { 0, 0, 0, 0 },
     { { MNEM, ' ', OP (DISP_26), 0 } },
-    & ifmt_l_bnf, { 0xc000000 }
+    & ifmt_l_j, { 0xc000000 }
   },
 /* l.bf ${disp-26} */
   {
     { 0, 0, 0, 0 },
     { { MNEM, ' ', OP (DISP_26), 0 } },
-    & ifmt_l_bnf, { 0x10000000 }
+    & ifmt_l_j, { 0x10000000 }
   },
 /* l.trap ${uimm-16} */
   {
@@ -192,6 +188,12 @@ static const CGEN_OPCODE or1k_cgen_insn_opcode_table[MAX_INSNS] =
   {
     { 0, 0, 0, 0 },
     { { MNEM, 0 } },
+    & ifmt_l_nop, { 0x15000000 }
+  },
+/* l.nop ${uimm-16} */
+  {
+    { 0, 0, 0, 0 },
+    { { MNEM, ' ', OP (UIMM_16), 0 } },
     & ifmt_l_nop, { 0x15000000 }
   },
 /* l.movhi $rD,$hi16 */

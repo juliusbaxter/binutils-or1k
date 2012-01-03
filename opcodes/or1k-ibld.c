@@ -566,13 +566,6 @@ or1k_cgen_insert_operand (CGEN_CPU_DESC cd,
 
   switch (opindex)
     {
-    case OR1K_OPERAND_ABS_26 :
-      {
-        long value = fields->f_abs26;
-        value = ((SI) (pc) >> (2));
-        errmsg = insert_normal (cd, value, 0|(1<<CGEN_IFLD_SIGNED)|(1<<CGEN_IFLD_ABS_ADDR), 0, 25, 26, 32, total_length, buffer);
-      }
-      break;
     case OR1K_OPERAND_DISP_26 :
       {
         long value = fields->f_disp26;
@@ -664,14 +657,6 @@ or1k_cgen_extract_operand (CGEN_CPU_DESC cd,
 
   switch (opindex)
     {
-    case OR1K_OPERAND_ABS_26 :
-      {
-        long value;
-        length = extract_normal (cd, ex_info, insn_value, 0|(1<<CGEN_IFLD_SIGNED)|(1<<CGEN_IFLD_ABS_ADDR), 0, 25, 26, 32, total_length, pc, & value);
-        value = ((value) << (2));
-        fields->f_abs26 = value;
-      }
-      break;
     case OR1K_OPERAND_DISP_26 :
       {
         long value;
@@ -756,9 +741,6 @@ or1k_cgen_get_int_operand (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
 
   switch (opindex)
     {
-    case OR1K_OPERAND_ABS_26 :
-      value = fields->f_abs26;
-      break;
     case OR1K_OPERAND_DISP_26 :
       value = fields->f_disp26;
       break;
@@ -812,9 +794,6 @@ or1k_cgen_get_vma_operand (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
 
   switch (opindex)
     {
-    case OR1K_OPERAND_ABS_26 :
-      value = fields->f_abs26;
-      break;
     case OR1K_OPERAND_DISP_26 :
       value = fields->f_disp26;
       break;
@@ -875,9 +854,6 @@ or1k_cgen_set_int_operand (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
 {
   switch (opindex)
     {
-    case OR1K_OPERAND_ABS_26 :
-      fields->f_abs26 = value;
-      break;
     case OR1K_OPERAND_DISP_26 :
       fields->f_disp26 = value;
       break;
@@ -928,9 +904,6 @@ or1k_cgen_set_vma_operand (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
 {
   switch (opindex)
     {
-    case OR1K_OPERAND_ABS_26 :
-      fields->f_abs26 = value;
-      break;
     case OR1K_OPERAND_DISP_26 :
       fields->f_disp26 = value;
       break;

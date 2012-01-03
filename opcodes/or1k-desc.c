@@ -246,7 +246,6 @@ const CGEN_IFLD or1k_cgen_ifld_table[] =
   { OR1K_F_I16_1, "f-i16-1", 0, 32, 10, 11, { 0, { { { (1<<MACH_BASE), 0 } }, { { 1, "\x80" } } } }  },
   { OR1K_F_I16_2, "f-i16-2", 0, 32, 25, 5, { 0, { { { (1<<MACH_BASE), 0 } }, { { 1, "\x80" } } } }  },
   { OR1K_F_DISP26, "f-disp26", 0, 32, 25, 26, { 0|A(PCREL_ADDR), { { { (1<<MACH_BASE), 0 } }, { { 1, "\x80" } } } }  },
-  { OR1K_F_ABS26, "f-abs26", 0, 32, 25, 26, { 0|A(ABS_ADDR), { { { (1<<MACH_BASE), 0 } }, { { 1, "\x80" } } } }  },
   { OR1K_F_I16NC, "f-i16nc", 0, 0, 0, 0,{ 0|A(SIGN_OPT)|A(VIRTUAL), { { { (1<<MACH_BASE), 0 } }, { { 1, "\x80" } } } }  },
   { 0, 0, 0, 0, 0, 0, { 0, { { { (1<<MACH_BASE), 0 } }, { { 1, "\x80" } } } } }
 };
@@ -300,10 +299,6 @@ const CGEN_OPERAND or1k_cgen_operand_table[] =
   { "disp-26", OR1K_OPERAND_DISP_26, HW_H_IADDR, 25, 26,
     { 0, { (const PTR) &or1k_cgen_ifld_table[OR1K_F_DISP26] } }, 
     { 0|A(PCREL_ADDR), { { { (1<<MACH_BASE), 0 } }, { { 1, "\x80" } } } }  },
-/* abs-26: abs 26 bit */
-  { "abs-26", OR1K_OPERAND_ABS_26, HW_H_IADDR, 25, 26,
-    { 0, { (const PTR) &or1k_cgen_ifld_table[OR1K_F_ABS26] } }, 
-    { 0|A(ABS_ADDR), { { { (1<<MACH_BASE), 0 } }, { { 1, "\x80" } } } }  },
 /* uimm-5: imm5 */
   { "uimm-5", OR1K_OPERAND_UIMM_5, HW_H_UINT, 4, 5,
     { 0, { (const PTR) &or1k_cgen_ifld_table[OR1K_F_UIMM5] } }, 
@@ -356,12 +351,12 @@ static const CGEN_IBASE or1k_cgen_insn_table[MAX_INSNS] =
      A `num' value of zero is thus invalid.
      Also, the special `invalid' insn resides here.  */
   { 0, 0, 0, 0, { 0, { { { (1<<MACH_BASE), 0 } }, { { 1, "\x80" } } } } },
-/* l.j ${abs-26} */
+/* l.j ${disp-26} */
   {
     OR1K_INSN_L_J, "l-j", "l.j", 32,
     { 0|A(NOT_IN_DELAY_SLOT)|A(UNCOND_CTI)|A(DELAY_SLOT), { { { (1<<MACH_BASE), 0 } }, { { 1, "\x80" } } } }
   },
-/* l.jal ${abs-26} */
+/* l.jal ${disp-26} */
   {
     OR1K_INSN_L_JAL, "l-jal", "l.jal", 32,
     { 0|A(NOT_IN_DELAY_SLOT)|A(UNCOND_CTI)|A(DELAY_SLOT), { { { (1<<MACH_BASE), 0 } }, { { 1, "\x80" } } } }
@@ -404,6 +399,11 @@ static const CGEN_IBASE or1k_cgen_insn_table[MAX_INSNS] =
 /* l.nop */
   {
     OR1K_INSN_L_NOP, "l-nop", "l.nop", 32,
+    { 0, { { { (1<<MACH_BASE), 0 } }, { { 1, "\x80" } } } }
+  },
+/* l.nop ${uimm-16} */
+  {
+    OR1K_INSN_L_NOP_IMM, "l-nop-imm", "l.nop", 32,
     { 0, { { { (1<<MACH_BASE), 0 } }, { { 1, "\x80" } } } }
   },
 /* l.movhi $rD,$hi16 */

@@ -188,13 +188,6 @@ or1k_cgen_parse_operand (CGEN_CPU_DESC cd,
 
   switch (opindex)
     {
-    case OR1K_OPERAND_ABS_26 :
-      {
-        bfd_vma value = 0;
-        errmsg = cgen_parse_address (cd, strp, OR1K_OPERAND_ABS_26, 0, NULL,  & value);
-        fields->f_abs26 = value;
-      }
-      break;
     case OR1K_OPERAND_DISP_26 :
       {
         bfd_vma value = 0;

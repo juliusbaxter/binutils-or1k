@@ -42,13 +42,13 @@ static const CGEN_OPINST sfmt_empty_ops[] ATTRIBUTE_UNUSED = {
 };
 
 static const CGEN_OPINST sfmt_l_j_ops[] ATTRIBUTE_UNUSED = {
-  { INPUT, "abs_26", HW_H_IADDR, CGEN_MODE_USI, OP_ENT (ABS_26), 0, 0 },
+  { INPUT, "disp_26", HW_H_IADDR, CGEN_MODE_USI, OP_ENT (DISP_26), 0, 0 },
   { OUTPUT, "pc", HW_H_PC, CGEN_MODE_USI, 0, 0, 0 },
   { END, (const char *)0, (enum cgen_hw_type)0, (enum cgen_mode)0, (enum cgen_operand_type)0, 0, 0 }
 };
 
 static const CGEN_OPINST sfmt_l_jal_ops[] ATTRIBUTE_UNUSED = {
-  { INPUT, "abs_26", HW_H_IADDR, CGEN_MODE_USI, OP_ENT (ABS_26), 0, 0 },
+  { INPUT, "disp_26", HW_H_IADDR, CGEN_MODE_USI, OP_ENT (DISP_26), 0, 0 },
   { INPUT, "h_delay_insn_SI", HW_H_DELAY_INSN, CGEN_MODE_SI, 0, 0, 0 },
   { OUTPUT, "h_gr_SI_9", HW_H_GR, CGEN_MODE_SI, 0, 9, 0 },
   { OUTPUT, "pc", HW_H_PC, CGEN_MODE_USI, 0, 0, 0 },
@@ -227,6 +227,7 @@ static const CGEN_OPINST *or1k_cgen_opinst_table[MAX_INSNS] = {
   & sfmt_l_trap_ops[0],
   & sfmt_l_trap_ops[0],
   & sfmt_l_rfe_ops[0],
+  & sfmt_l_nop_ops[0],
   & sfmt_l_nop_ops[0],
   & sfmt_l_movhi_ops[0],
   & sfmt_l_mfspr_ops[0],
