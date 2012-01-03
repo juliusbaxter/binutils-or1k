@@ -303,10 +303,12 @@ md_cgen_lookup_reloc (const CGEN_INSN *    insn ATTRIBUTE_UNUSED,
 
   switch (operand->type)
     {
+      /*
     case OR1K_OPERAND_ABS_26:
       fixP->fx_pcrel = 0;
       type = BFD_RELOC_OR1K_ABS_26;
       goto emit;
+      */
     case OR1K_OPERAND_DISP_26:
       fixP->fx_pcrel = 1;
       type = BFD_RELOC_OR1K_REL_26;
