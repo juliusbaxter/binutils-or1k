@@ -65,7 +65,7 @@ Go into the binutils/opcodes source directory (ie. not where you're running
         "guile -l $HOME/git/cgen/src/cgen/guile.scm -s" \
 	$HOME/git/cgen/src/cgen "-v" or1k or1k 	    	\
 	$HOME/git/cgen/src/cgen/cpu/or1k.cpu		\
-	$HOME/git/cgen/src/cgen/cpu/or1k.opc
+	$HOME/git/cgen/src/cgen/cpu/or1k.opc "" opinst
 
 Remember, if using the "make run-cgen-all" method, as below, it uses the .cpu
 files in the binutils/cpu source directory, so those will have to be updated
