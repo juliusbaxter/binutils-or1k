@@ -87,6 +87,11 @@ static const CGEN_OPINST sfmt_l_rfe_ops[] ATTRIBUTE_UNUSED = {
   { END, (const char *)0, (enum cgen_hw_type)0, (enum cgen_mode)0, (enum cgen_operand_type)0, 0, 0 }
 };
 
+static const CGEN_OPINST sfmt_l_nop_imm_ops[] ATTRIBUTE_UNUSED = {
+  { INPUT, "uimm_16", HW_H_UINT, CGEN_MODE_UINT, OP_ENT (UIMM_16), 0, 0 },
+  { END, (const char *)0, (enum cgen_hw_type)0, (enum cgen_mode)0, (enum cgen_operand_type)0, 0, 0 }
+};
+
 static const CGEN_OPINST sfmt_l_nop_ops[] ATTRIBUTE_UNUSED = {
   { END, (const char *)0, (enum cgen_hw_type)0, (enum cgen_mode)0, (enum cgen_operand_type)0, 0, 0 }
 };
@@ -227,7 +232,7 @@ static const CGEN_OPINST *or1k_cgen_opinst_table[MAX_INSNS] = {
   & sfmt_l_trap_ops[0],
   & sfmt_l_trap_ops[0],
   & sfmt_l_rfe_ops[0],
-  & sfmt_l_nop_ops[0],
+  & sfmt_l_nop_imm_ops[0],
   & sfmt_l_nop_ops[0],
   & sfmt_l_movhi_ops[0],
   & sfmt_l_mfspr_ops[0],

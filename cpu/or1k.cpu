@@ -20,8 +20,9 @@
 
 (include "simplify.inc")
 
-; The OpenRISC family of microprocessor architectures is a set of RISC
-; ISAs with an emphasis on scalability and is targetted at embedded use.
+; The OpenRISC family is a set of RISC microprocessor architectures with an 
+; emphasis on scalability and is targetted at embedded use.
+; The CPU RTL development is a collaborative open source effort.
 ; http://opencores.org/or1k
 ; http://openrisc.net
 
@@ -30,7 +31,7 @@
   (comment "OpenRISC 1000")
   (insn-lsb0? #t)
   (machs or32)
-  (isas ORBIS32 ORBIS64 ORFPX32 ORFPX64 ORVDX64)
+  (isas ORBIS32 );ORBIS64 ORFPX32 ORFPX64 ORVDX64)
 )
 
 ; Instruction set parameters.
@@ -43,42 +44,42 @@
   (setup-semantics (set-quiet (reg h-delay-insn) (add pc 4)))
 )
 
-(define-isa
-  ; Name of the ISA.
-  (name ORBIS64)
-  ; Base insturction length.  The insns are always 32 bits wide.
-  (base-insn-bitsize 32)
-  ; Address of insn in delay slot
-  (setup-semantics (set-quiet (reg h-delay-insn) (add pc 4)))
-)
+;(define-isa
+;  ; Name of the ISA.
+;  (name ORBIS64)
+;  ; Base insturction length.  The insns are always 32 bits wide.
+;  (base-insn-bitsize 32)
+;  ; Address of insn in delay slot
+;  (setup-semantics (set-quiet (reg h-delay-insn) (add pc 4)))
+;)
 
-(define-isa
-  ; Name of the ISA.
-  (name ORFPX32)
-  ; Base insturction length.  The insns are always 32 bits wide.
-  (base-insn-bitsize 32)
-  ; Address of insn in delay slot
-  (setup-semantics (set-quiet (reg h-delay-insn) (add pc 4)))
-)
+;(define-isa
+;  ; Name of the ISA.
+;  (name ORFPX32)
+;  ; Base insturction length.  The insns are always 32 bits wide.
+;  (base-insn-bitsize 32)
+;  ; Address of insn in delay slot
+;  (setup-semantics (set-quiet (reg h-delay-insn) (add pc 4)))
+;)
 
 
-(define-isa
-  ; Name of the ISA.
-  (name ORFPX64)
-  ; Base insturction length.  The insns are always 32 bits wide.
-  (base-insn-bitsize 32)
-  ; Address of insn in delay slot
-  (setup-semantics (set-quiet (reg h-delay-insn) (add pc 4)))
-)
+;(define-isa
+;  ; Name of the ISA.
+;  (name ORFPX64)
+;  ; Base insturction length.  The insns are always 32 bits wide.
+;  (base-insn-bitsize 32)
+;  ; Address of insn in delay slot
+;  (setup-semantics (set-quiet (reg h-delay-insn) (add pc 4)))
+;)
 
-(define-isa
-  ; Name of the ISA.
-  (name ORVDX64)
-  ; Base insturction length.  The insns are always 32 bits wide.
-  (base-insn-bitsize 32)
-  ; Address of insn in delay slot
-  (setup-semantics (set-quiet (reg h-delay-insn) (add pc 4)))
-)
+;(define-isa
+;  ; Name of the ISA.
+;  (name ORVDX64)
+;  ; Base insturction length.  The insns are always 32 bits wide.
+;  (base-insn-bitsize 32)
+;  ; Address of insn in delay slot
+;  (setup-semantics (set-quiet (reg h-delay-insn) (add pc 4)))
+;)
 
 
 ; CPU family definitions.
@@ -102,7 +103,7 @@
   (name or32)
   (comment "Generic OpenRISC 1000 32-bit big-endian CPU")
   (cpu or1k32bef)
-  (isas ORBIS32 ORFPX32)
+  (isas ORBIS32 );ORFPX32)
   (bfd-name "or1k")
 )
 

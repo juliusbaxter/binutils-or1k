@@ -63,7 +63,7 @@ static const CGEN_IFMT ifmt_l_rfe ATTRIBUTE_UNUSED = {
   32, 32, 0xffffffff, { { F (F_OPCODE) }, { F (F_RESV_25_26) }, { 0 } }
 };
 
-static const CGEN_IFMT ifmt_l_nop ATTRIBUTE_UNUSED = {
+static const CGEN_IFMT ifmt_l_nop_imm ATTRIBUTE_UNUSED = {
   32, 32, 0xffff0000, { { F (F_OPCODE) }, { F (F_OP_25_2) }, { F (F_RESV_23_8) }, { F (F_UIMM16) }, { 0 } }
 };
 
@@ -184,17 +184,17 @@ static const CGEN_OPCODE or1k_cgen_insn_opcode_table[MAX_INSNS] =
     { { MNEM, 0 } },
     & ifmt_l_rfe, { 0x24000000 }
   },
-/* l.nop */
-  {
-    { 0, 0, 0, 0 },
-    { { MNEM, 0 } },
-    & ifmt_l_nop, { 0x15000000 }
-  },
 /* l.nop ${uimm-16} */
   {
     { 0, 0, 0, 0 },
     { { MNEM, ' ', OP (UIMM_16), 0 } },
-    & ifmt_l_nop, { 0x15000000 }
+    & ifmt_l_nop_imm, { 0x15000000 }
+  },
+/* l.nop */
+  {
+    { 0, 0, 0, 0 },
+    { { MNEM, 0 } },
+    & ifmt_l_nop_imm, { 0x15000000 }
   },
 /* l.movhi $rD,$hi16 */
   {
