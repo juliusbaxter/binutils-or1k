@@ -72,6 +72,7 @@ static const CGEN_OPINST sfmt_l_jalr_ops[] ATTRIBUTE_UNUSED = {
 static const CGEN_OPINST sfmt_l_bnf_ops[] ATTRIBUTE_UNUSED = {
   { INPUT, "cbit", HW_H_CBIT, CGEN_MODE_BI, 0, 0, 0 },
   { INPUT, "disp_26", HW_H_IADDR, CGEN_MODE_USI, OP_ENT (DISP_26), 0, COND_REF },
+  { INPUT, "pc", HW_H_PC, CGEN_MODE_USI, 0, 0, COND_REF },
   { OUTPUT, "pc", HW_H_PC, CGEN_MODE_USI, 0, 0, COND_REF },
   { END, (const char *)0, (enum cgen_hw_type)0, (enum cgen_mode)0, (enum cgen_operand_type)0, 0, 0 }
 };
