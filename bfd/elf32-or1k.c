@@ -76,7 +76,7 @@ static reloc_howto_type or1k_elf_howto_table[] =
 
   HOWTO (R_OR1K_LO_16_IN_INSN, /* type */
 	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
+	 2,			/* size (0 = byte, 1 = short, 2 = long) */
 	 16,			/* bitsize */
 	 FALSE,			/* pc_relative */
 	 0,			/* bitpos */
@@ -90,7 +90,7 @@ static reloc_howto_type or1k_elf_howto_table[] =
 
   HOWTO (R_OR1K_HI_16_IN_INSN, /* type */
 	 16,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
+	 2,			/* size (0 = byte, 1 = short, 2 = long) */
 	 16,			/* bitsize */
 	 FALSE,			/* pc_relative */
 	 0,			/* bitpos */
