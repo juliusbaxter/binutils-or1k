@@ -102,51 +102,6 @@ static reloc_howto_type or1k_elf_howto_table[] =
 	 0x0000ffff,		/* dst_mask */
 	 FALSE),		/* pcrel_offset */
 
-  /* An 8 bit absolute relocation.  */
-  HOWTO (R_OR1K_8,		/* type */
-	 0,			/* rightshift */
-	 0,			/* size (0 = byte, 1 = short, 2 = long) */
-	 8,			/* bitsize */
-	 FALSE,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_bitfield, /* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_OR1K_8",	/* name */
-	 TRUE,			/* partial_inplace */
-	 0x0000,		/* src_mask */
-	 0x00ff,		/* dst_mask */
-	 FALSE),		/* pcrel_offset */
-
-  /* A 16 bit absolute relocation.  */
-  HOWTO (R_OR1K_16,		/* type */
-	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 FALSE,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_bitfield, /* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_OR1K_16",	/* name */
-	 TRUE,			/* partial_inplace */
-	 0x00000000,		/* src_mask */
-	 0x0000ffff,		/* dst_mask */
-	 FALSE),		/* pcrel_offset */
-
-  /* A 32 bit absolute relocation.  */
-  HOWTO (R_OR1K_32,		/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 32,			/* bitsize */
-	 FALSE,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_bitfield, /* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_OR1K_32",	/* name */
-	 TRUE,			/* partial_inplace */
-	 0x00000000,		/* src_mask */
-	 0xffffffff,		/* dst_mask */
-	 FALSE),		/* pcrel_offset */
-
   /* GNU extension to record C++ vtable hierarchy.  */
   HOWTO (R_OR1K_GNU_VTINHERIT, /* type */
 	 0,			/* rightshift */
@@ -189,9 +144,6 @@ struct or1k_reloc_map
 static const struct or1k_reloc_map or1k_reloc_map[] =
 {
   { BFD_RELOC_NONE, 		R_OR1K_NONE },
-  { BFD_RELOC_32, 		R_OR1K_32 },
-  { BFD_RELOC_16, 		R_OR1K_16 },
-  { BFD_RELOC_8, 		R_OR1K_8 },
   { BFD_RELOC_OR1K_REL_26,	R_OR1K_INSN_REL_26 },
   { BFD_RELOC_OR1K_ABS_26,	R_OR1K_INSN_ABS_26 },
   { BFD_RELOC_HI16, 		R_OR1K_HI_16_IN_INSN },

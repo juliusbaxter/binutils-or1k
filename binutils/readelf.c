@@ -9732,8 +9732,6 @@ is_32bit_abs_reloc (unsigned int reloc_type)
     case EM_ALTERA_NIOS2:
     case EM_NIOS32:
       return reloc_type == 1; /* R_NIOS_32.  */
-    case EM_OR1K:
-      return reloc_type == 1; /* R_OR1K_32.  */
     case EM_PARISC:
       return (reloc_type == 1 /* R_PARISC_DIR32.  */
 	      || reloc_type == 41); /* R_PARISC_SECREL32.  */
