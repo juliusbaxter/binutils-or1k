@@ -1,0 +1,33 @@
+			or1k GNU sim parts
+			==================
+
+This is a CGEN-based GNU sim port for the OpenRISC 1000 architecture.
+
+It looks like basic software which doesn't need peripherals works.
+
+Regenerating CGEN output
+========================
+
+I used the following commands are used to regenerate all the CGEN-derived files:
+
+/bin/bash ../common/cgen.sh arch `pwd` "guile -l $HOME/git/cgen/src/cgen/guile.scm -s" $HOME/git/cgen/src/cgen "-v" or1k "with-scache with-profile=fn" or1k32bef "" or32 "" $HOME/git/cgen/src/cgen/cpu/or1k.cpu "/semsw/" $HOME/git/cgen/src/cgen/cpu/or1k.opc
+
+/bin/bash ../common/cgen.sh cpu-decode `pwd` "guile -l $HOME/git/cgen/src/cgen/guile.scm -s" $HOME/git/cgen/src/cgen "-v" or1k "with-scache with-profile=fn" or1k32bef "" or32 "" $HOME/git/cgen/src/cgen/cpu/or1k.cpu "/semsw/" $HOME/git/cgen/src/cgen/cpu/or1k.opc
+
+/bin/bash ../common/cgen.sh defs `pwd` "guile -l $HOME/git/cgen/src/cgen/guile.scm -s" $HOME/git/cgen/src/cgen "-v" or1k "with-scache with-profile=fn" or1k32bef "" or32 "" $HOME/git/cgen/src/cgen/cpu/or1k.cpu "/semsw/" $HOME/git/cgen/src/cgen/cpu/or1k.opc
+
+/bin/bash ../common/cgen.sh desc `pwd` "guile -l $HOME/git/cgen/src/cgen/guile.scm -s" $HOME/git/cgen/src/cgen "-v" or1k "" or1k32bef "" or32 "" $HOME/git/cgen/src/cgen/cpu/or1k.cpu "/semsw/" $HOME/git/cgen/src/cgen/cpu/or1k.opc
+
+Running check-sim
+=================
+
+After compile, go into sim/testsuite and there will be a site.exp file in there.
+This must be exported to the DEJAGNU variable:
+
+     export DEJAGNU=`pwd`/site.exp
+
+Then run 
+
+     make check
+
+At present there's 21 tests. More should probably be added.

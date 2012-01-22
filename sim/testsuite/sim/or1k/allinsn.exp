@@ -1,0 +1,17 @@
+# OR1K simulator testsuite.
+
+if [istarget or1k-*-*] {
+    # load support procs
+    # load_lib cgen.exp
+
+    # all machines
+    set all_machs "or32"
+
+
+    # Get all .s files and run them
+    #puts "srcdir variable: $srcdir/$subdir"
+    foreach src [lsort [glob -nocomplain $srcdir/$subdir/*.s]] {
+	puts "found .s file: $src"
+	run_sim_test $src $all_machs
+    }
+}

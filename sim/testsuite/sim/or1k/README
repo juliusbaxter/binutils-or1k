@@ -1,0 +1,12 @@
+			OR1K GDB sim testsuite
+			======================
+
+This little testsuite is by no means complete, but has helped the development
+of the sim to get to the stage whereby it runs basic programs.
+
+If bugs are found in the simulator in future, please ensure a testcase is added
+here, it's very simple to do.
+
+Please make use of the macros in testutils.inc (look at the existing tests) and
+look at the README in the sim/or1k path for information on running the
+code found here after building the simulator

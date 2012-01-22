@@ -1,0 +1,94 @@
+# Makefile for OpenRISC 1000 GDB simulator
+# Contributed by Jon Beniston <jon@beniston.com>
+# Modified by Julius Baxter <juliusbaxter@gmail.com>
+
+## COMMON_PRE_CONFIG_FRAG
+
+# List of object files, less common parts.
+SIM_OBJS = \
+	$(SIM_NEW_COMMON_OBJS) \
+	sim-cpu.o \
+	sim-hload.o \
+	sim-hrw.o \
+	sim-model.o \
+	sim-reg.o \
+	sim-signal.o \
+        cgen-utils.o cgen-trace.o cgen-scache.o \
+        cgen-run.o sim-reason.o sim-engine.o sim-stop.o \
+        sim-if.o arch.o \
+        cpu.o decode.o sem-switch.o model.o mloop.o \
+	or1k32bef.o traps.o
+
+
+# List of extra dependencies.
+# Generally this consists of simulator specific files included by sim-main.h.
+SIM_EXTRA_DEPS = $(CGEN_INCLUDE_DEPS) $(srcdir)/or1k-desc.h
+
+# List of flags to always pass to $(CC).
+#SIM_EXTRA_CFLAGS =
+
+# List of main object files for `run'.
+SIM_RUN_OBJS = nrun.o
+
+SIM_EXTRA_CLEAN = or1k-clean
+
+# This selects the or1k newlib/libgloss syscall definitions.
+#NL_TARGET = -DNL_TARGET_or1k
+
+## COMMON_POST_CONFIG_FRAG
+
+arch = or1k
+
+arch.o: arch.c $(SIM_MAIN_DEPS)
+
+traps.o: traps.c targ-vals.h $(SIM_MAIN_DEPS)
+
+sim-if.o: sim-if.c $(SIM_MAIN_DEPS) $(srcdir)/../common/sim-core.h
+
+OR1K32BEF_INCLUDE_DEPS = \
+	$(CGEN_MAIN_CPU_DEPS) \
+	cpu.h decode.h eng.h
+
+or1k32bef.o: or1k32bef.c $(OR1K32BEF_INCLUDE_DEPS)
+
+# FIXME: Use of `mono' is wip.
+mloop.c eng.h: stamp-mloop
+stamp-mloop: $(srcdir)/../common/genmloop.sh mloop.in Makefile
+	$(SHELL) $(srccom)/genmloop.sh \
+		-mono -fast -pbb -full-switch -switch sem-switch.c \
+		-cpu or1k32bef -infile $(srcdir)/mloop.in
+	$(SHELL) $(srcroot)/move-if-change eng.hin eng.h
+	$(SHELL) $(srcroot)/move-if-change mloop.cin mloop.c
+	touch stamp-mloop
+mloop.o: mloop.c sem-switch.c 
+
+cpu.o: cpu.c $(OR1K32BEF_INCLUDE_DEPS)
+decode.o: decode.c $(OR1K32BEF_INCLUDE_DEPS)
+sem-switch.o: sem-switch.c $(OR1K32BEF_INCLUDE_DEPS)
+model.o: model.c $(OR1K32BEF_INCLUDE_DEPS)
+
+or1k-clean:
+	rm -f mloop.c eng.h stamp-mloop
+	rm -f stamp-arch stamp-cpu 
+	rm -f tmp-*
+
+# cgen support, enable with --enable-cgen-maint
+CGEN_MAINT = ; @true
+# The following line is commented in or out depending upon --enable-cgen-maint.
+@CGEN_MAINT@CGEN_MAINT =
+
+stamp-arch: $(CGEN_READ_SCM) $(CGEN_ARCH_SCM) $(CPU_DIR)/or1k.cpu
+	$(MAKE) cgen-arch $(CGEN_FLAGS_TO_PASS) mach=all \
+	  archfile=$(CPU_DIR)/or1k.cpu \
+	  FLAGS="with-scache with-profile=fn"
+	touch stamp-arch
+arch.h arch.c cpuall.h: $(CGEN_MAINT) stamp-arch
+
+stamp-cpu: $(CGEN_READ_SCM) $(CGEN_CPU_SCM) $(CGEN_DECODE_SCM) $(CPU_DIR)/or1k.cpu
+	$(MAKE) cgen-cpu-decode $(CGEN_FLAGS_TO_PASS) \
+	  cpu=or1k32bef mach=or32 SUFFIX= \
+	  archfile=$(CPU_DIR)/or1k.cpu \
+	  FLAGS="with-scache with-profile=fn" \
+	  EXTRAFILES="$(CGEN_CPU_SEM) $(CGEN_CPU_SEMSW)"
+	touch stamp-cpu
+cpu.h sem.c sem-switch.c model.c decode.c decode.h: $(CGEN_MAINT) stamp-cpu
