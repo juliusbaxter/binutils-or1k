@@ -10,13 +10,13 @@ Regenerating CGEN output
 
 I used the following commands are used to regenerate all the CGEN-derived files:
 
-/bin/bash ../common/cgen.sh arch `pwd` "guile -l $HOME/git/cgen/src/cgen/guile.scm -s" $HOME/git/cgen/src/cgen "-v" or1k "with-scache with-profile=fn" or1k32bef "" or32 "" $HOME/git/cgen/src/cgen/cpu/or1k.cpu "/semsw/" $HOME/git/cgen/src/cgen/cpu/or1k.opc
+/bin/bash ../common/cgen.sh arch `pwd` "guile -l $HOME/git/cgen/src/cgen/guile.scm -s" $HOME/git/cgen/src/cgen "-v" or1k "with-scache with-profile=fn" or1k32bef "" or32 "" $HOME/git/cgen/src/cpu/or1k.cpu "/semsw/" $HOME/git/cgen/src/cpu/or1k.opc
 
-/bin/bash ../common/cgen.sh cpu-decode `pwd` "guile -l $HOME/git/cgen/src/cgen/guile.scm -s" $HOME/git/cgen/src/cgen "-v" or1k "with-scache with-profile=fn" or1k32bef "" or32 "" $HOME/git/cgen/src/cgen/cpu/or1k.cpu "/semsw/" $HOME/git/cgen/src/cgen/cpu/or1k.opc
+/bin/bash ../common/cgen.sh cpu-decode `pwd` "guile -l $HOME/git/cgen/src/cgen/guile.scm -s" $HOME/git/cgen/src/cgen "-v" or1k "with-scache with-profile=fn" or1k32bef "" or32 "" $HOME/git/cgen/src/cpu/or1k.cpu "/semsw/" $HOME/git/cgen/src/cpu/or1k.opc
 
-/bin/bash ../common/cgen.sh defs `pwd` "guile -l $HOME/git/cgen/src/cgen/guile.scm -s" $HOME/git/cgen/src/cgen "-v" or1k "with-scache with-profile=fn" or1k32bef "" or32 "" $HOME/git/cgen/src/cgen/cpu/or1k.cpu "/semsw/" $HOME/git/cgen/src/cgen/cpu/or1k.opc
+/bin/bash ../common/cgen.sh defs `pwd` "guile -l $HOME/git/cgen/src/cgen/guile.scm -s" $HOME/git/cgen/src/cgen "-v" or1k "with-scache with-profile=fn" or1k32bef "" or32 "" $HOME/git/cgen/src/cpu/or1k.cpu "/semsw/" $HOME/git/cgen/src/cpu/or1k.opc
 
-/bin/bash ../common/cgen.sh desc `pwd` "guile -l $HOME/git/cgen/src/cgen/guile.scm -s" $HOME/git/cgen/src/cgen "-v" or1k "" or1k32bef "" or32 "" $HOME/git/cgen/src/cgen/cpu/or1k.cpu "/semsw/" $HOME/git/cgen/src/cgen/cpu/or1k.opc
+/bin/bash ../common/cgen.sh desc `pwd` "guile -l $HOME/git/cgen/src/cgen/guile.scm -s" $HOME/git/cgen/src/cgen "-v" or1k "" or1k32bef "" or32 "" $HOME/git/cgen/src/cpu/or1k.cpu "/semsw/" $HOME/git/cgen/src/cpu/or1k.opc
 
 Running check-sim
 =================

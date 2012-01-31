@@ -691,6 +691,38 @@ model_or1200_l_divu (SIM_CPU *current_cpu, void *sem_arg)
 }
 
 static int
+model_or1200_l_ff1 (SIM_CPU *current_cpu, void *sem_arg)
+{
+#define FLD(f) abuf->fields.sfmt_l_addi.f
+  const ARGBUF * UNUSED abuf = SEM_ARGBUF ((SEM_ARG) sem_arg);
+  const IDESC * UNUSED idesc = abuf->idesc;
+  int cycles = 0;
+  {
+    int referenced = 0;
+    int UNUSED insn_referenced = abuf->written;
+    cycles += or1k32bef_model_or1200_u_exec (current_cpu, idesc, 0, referenced);
+  }
+  return cycles;
+#undef FLD
+}
+
+static int
+model_or1200_l_fl1 (SIM_CPU *current_cpu, void *sem_arg)
+{
+#define FLD(f) abuf->fields.sfmt_l_addi.f
+  const ARGBUF * UNUSED abuf = SEM_ARGBUF ((SEM_ARG) sem_arg);
+  const IDESC * UNUSED idesc = abuf->idesc;
+  int cycles = 0;
+  {
+    int referenced = 0;
+    int UNUSED insn_referenced = abuf->written;
+    cycles += or1k32bef_model_or1200_u_exec (current_cpu, idesc, 0, referenced);
+  }
+  return cycles;
+#undef FLD
+}
+
+static int
 model_or1200_l_addi (SIM_CPU *current_cpu, void *sem_arg)
 {
 #define FLD(f) abuf->fields.sfmt_l_addi.f
@@ -917,7 +949,7 @@ model_or1200_l_sfles (SIM_CPU *current_cpu, void *sem_arg)
 static int
 model_or1200_l_sfgtui (SIM_CPU *current_cpu, void *sem_arg)
 {
-#define FLD(f) abuf->fields.sfmt_l_mfspr.f
+#define FLD(f) abuf->fields.sfmt_l_addi.f
   const ARGBUF * UNUSED abuf = SEM_ARGBUF ((SEM_ARG) sem_arg);
   const IDESC * UNUSED idesc = abuf->idesc;
   int cycles = 0;
@@ -933,7 +965,7 @@ model_or1200_l_sfgtui (SIM_CPU *current_cpu, void *sem_arg)
 static int
 model_or1200_l_sfgeui (SIM_CPU *current_cpu, void *sem_arg)
 {
-#define FLD(f) abuf->fields.sfmt_l_mfspr.f
+#define FLD(f) abuf->fields.sfmt_l_addi.f
   const ARGBUF * UNUSED abuf = SEM_ARGBUF ((SEM_ARG) sem_arg);
   const IDESC * UNUSED idesc = abuf->idesc;
   int cycles = 0;
@@ -949,7 +981,7 @@ model_or1200_l_sfgeui (SIM_CPU *current_cpu, void *sem_arg)
 static int
 model_or1200_l_sfltui (SIM_CPU *current_cpu, void *sem_arg)
 {
-#define FLD(f) abuf->fields.sfmt_l_mfspr.f
+#define FLD(f) abuf->fields.sfmt_l_addi.f
   const ARGBUF * UNUSED abuf = SEM_ARGBUF ((SEM_ARG) sem_arg);
   const IDESC * UNUSED idesc = abuf->idesc;
   int cycles = 0;
@@ -965,7 +997,7 @@ model_or1200_l_sfltui (SIM_CPU *current_cpu, void *sem_arg)
 static int
 model_or1200_l_sfleui (SIM_CPU *current_cpu, void *sem_arg)
 {
-#define FLD(f) abuf->fields.sfmt_l_mfspr.f
+#define FLD(f) abuf->fields.sfmt_l_addi.f
   const ARGBUF * UNUSED abuf = SEM_ARGBUF ((SEM_ARG) sem_arg);
   const IDESC * UNUSED idesc = abuf->idesc;
   int cycles = 0;
@@ -1061,7 +1093,7 @@ model_or1200_l_sfeq (SIM_CPU *current_cpu, void *sem_arg)
 static int
 model_or1200_l_sfeqi (SIM_CPU *current_cpu, void *sem_arg)
 {
-#define FLD(f) abuf->fields.sfmt_l_lwz.f
+#define FLD(f) abuf->fields.sfmt_l_addi.f
   const ARGBUF * UNUSED abuf = SEM_ARGBUF ((SEM_ARG) sem_arg);
   const IDESC * UNUSED idesc = abuf->idesc;
   int cycles = 0;
@@ -1093,7 +1125,7 @@ model_or1200_l_sfne (SIM_CPU *current_cpu, void *sem_arg)
 static int
 model_or1200_l_sfnei (SIM_CPU *current_cpu, void *sem_arg)
 {
-#define FLD(f) abuf->fields.sfmt_l_lwz.f
+#define FLD(f) abuf->fields.sfmt_l_addi.f
   const ARGBUF * UNUSED abuf = SEM_ARGBUF ((SEM_ARG) sem_arg);
   const IDESC * UNUSED idesc = abuf->idesc;
   int cycles = 0;
@@ -1159,6 +1191,8 @@ static const INSN_TIMING or1200_timing[] = {
   { OR1K32BEF_INSN_L_MULU, model_or1200_l_mulu, { { (int) UNIT_OR1200_U_EXEC, 1, 1 } } },
   { OR1K32BEF_INSN_L_DIV, model_or1200_l_div, { { (int) UNIT_OR1200_U_EXEC, 1, 1 } } },
   { OR1K32BEF_INSN_L_DIVU, model_or1200_l_divu, { { (int) UNIT_OR1200_U_EXEC, 1, 1 } } },
+  { OR1K32BEF_INSN_L_FF1, model_or1200_l_ff1, { { (int) UNIT_OR1200_U_EXEC, 1, 1 } } },
+  { OR1K32BEF_INSN_L_FL1, model_or1200_l_fl1, { { (int) UNIT_OR1200_U_EXEC, 1, 1 } } },
   { OR1K32BEF_INSN_L_ADDI, model_or1200_l_addi, { { (int) UNIT_OR1200_U_EXEC, 1, 1 } } },
   { OR1K32BEF_INSN_L_ANDI, model_or1200_l_andi, { { (int) UNIT_OR1200_U_EXEC, 1, 1 } } },
   { OR1K32BEF_INSN_L_ORI, model_or1200_l_ori, { { (int) UNIT_OR1200_U_EXEC, 1, 1 } } },

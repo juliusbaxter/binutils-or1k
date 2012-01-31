@@ -161,6 +161,29 @@ or1k32bef_model_or1200_u_exec (SIM_CPU * cpu, const IDESC * idesc,
 
 #endif /* WITH_PROFILE_MODEL_P */
 
+SI
+or1k32bef_h_ff1 (SIM_CPU * current_cpu, unsigned int value)
+{
+  int i;
+  for (i=0;i<32;i++)
+    if ((1<<i)&value)
+      return ++i;
+
+  return 0;
+}
+
+SI
+or1k32bef_h_fl1 (SIM_CPU * current_cpu, unsigned int value)
+{
+  int i;
+  for (i=0;i<32;i++)
+    if ((1<<(31-i))&value)
+      return ++i;
+
+  return 0;
+}
+
+
 /* l.nop handler */
 void
 or1k32bef_nop_handler (SIM_CPU * current_cpu, unsigned short imm)

@@ -366,14 +366,14 @@ struct scache {
   UINT f_opcode; \
   UINT f_op_25_5; \
   UINT f_r2; \
-  UINT f_uimm16; \
+  INT f_lo16; \
   unsigned int length;
 #define EXTRACT_IFMT_L_SFGTUI_CODE \
   length = 4; \
   f_opcode = EXTRACT_LSB0_UINT (insn, 32, 31, 6); \
   f_op_25_5 = EXTRACT_LSB0_UINT (insn, 32, 25, 5); \
   f_r2 = EXTRACT_LSB0_UINT (insn, 32, 20, 5); \
-  f_uimm16 = EXTRACT_LSB0_UINT (insn, 32, 15, 16); \
+  f_lo16 = EXTRACT_LSB0_SINT (insn, 32, 15, 16); \
 
 #define EXTRACT_IFMT_L_SFGTSI_VARS \
   UINT f_opcode; \
