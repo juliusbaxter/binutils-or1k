@@ -178,7 +178,7 @@ or1k32bef_h_fl1 (SIM_CPU * current_cpu, unsigned int value)
   int i;
   for (i=0;i<32;i++)
     if ((1<<(31-i))&value)
-      return ++i;
+      return (32-i);
 
   return 0;
 }
