@@ -186,6 +186,12 @@ static const CGEN_OPINST sfmt_l_add_ops[] ATTRIBUTE_UNUSED = {
   { END, (const char *)0, (enum cgen_hw_type)0, (enum cgen_mode)0, (enum cgen_operand_type)0, 0, 0 }
 };
 
+static const CGEN_OPINST sfmt_l_ff1_ops[] ATTRIBUTE_UNUSED = {
+  { INPUT, "rA", HW_H_GR, CGEN_MODE_SI, OP_ENT (RA), 0, 0 },
+  { OUTPUT, "rD", HW_H_GR, CGEN_MODE_SI, OP_ENT (RD), 0, 0 },
+  { END, (const char *)0, (enum cgen_hw_type)0, (enum cgen_mode)0, (enum cgen_operand_type)0, 0, 0 }
+};
+
 static const CGEN_OPINST sfmt_l_addi_ops[] ATTRIBUTE_UNUSED = {
   { INPUT, "lo16", HW_H_LO16, CGEN_MODE_INT, OP_ENT (LO16), 0, 0 },
   { INPUT, "rA", HW_H_GR, CGEN_MODE_SI, OP_ENT (RA), 0, 0 },
@@ -201,8 +207,8 @@ static const CGEN_OPINST sfmt_l_sfgtu_ops[] ATTRIBUTE_UNUSED = {
 };
 
 static const CGEN_OPINST sfmt_l_sfgtui_ops[] ATTRIBUTE_UNUSED = {
+  { INPUT, "lo16", HW_H_LO16, CGEN_MODE_INT, OP_ENT (LO16), 0, 0 },
   { INPUT, "rA", HW_H_GR, CGEN_MODE_SI, OP_ENT (RA), 0, 0 },
-  { INPUT, "uimm_16", HW_H_UINT, CGEN_MODE_UINT, OP_ENT (UIMM_16), 0, 0 },
   { OUTPUT, "cbit", HW_H_CBIT, CGEN_MODE_BI, 0, 0, 0 },
   { END, (const char *)0, (enum cgen_hw_type)0, (enum cgen_mode)0, (enum cgen_operand_type)0, 0, 0 }
 };
@@ -265,6 +271,8 @@ static const CGEN_OPINST *or1k_cgen_opinst_table[MAX_INSNS] = {
   & sfmt_l_add_ops[0],
   & sfmt_l_add_ops[0],
   & sfmt_l_add_ops[0],
+  & sfmt_l_ff1_ops[0],
+  & sfmt_l_ff1_ops[0],
   & sfmt_l_addi_ops[0],
   & sfmt_l_addi_ops[0],
   & sfmt_l_addi_ops[0],
@@ -288,9 +296,9 @@ static const CGEN_OPINST *or1k_cgen_opinst_table[MAX_INSNS] = {
   & sfmt_l_sfgtsi_ops[0],
   & sfmt_l_sfgtsi_ops[0],
   & sfmt_l_sfgtu_ops[0],
-  & sfmt_l_sfgtsi_ops[0],
+  & sfmt_l_sfgtui_ops[0],
   & sfmt_l_sfgtu_ops[0],
-  & sfmt_l_sfgtsi_ops[0],
+  & sfmt_l_sfgtui_ops[0],
 };
 
 /* Function to call before using the operand instance table.  */

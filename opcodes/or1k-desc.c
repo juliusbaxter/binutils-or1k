@@ -544,6 +544,16 @@ static const CGEN_IBASE or1k_cgen_insn_table[MAX_INSNS] =
     OR1K_INSN_L_DIVU, "l-divu", "l.divu", 32,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
+/* l.ff1 $rD,$rA */
+  {
+    OR1K_INSN_L_FF1, "l-ff1", "l.ff1", 32,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* l.fl1 $rD,$rA */
+  {
+    OR1K_INSN_L_FL1, "l-fl1", "l.fl1", 32,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
 /* l.addi $rD,$rA,$lo16 */
   {
     OR1K_INSN_L_ADDI, "l-addi", "l.addi", 32,
@@ -614,22 +624,22 @@ static const CGEN_IBASE or1k_cgen_insn_table[MAX_INSNS] =
     OR1K_INSN_L_SFLES, "l-sfles", "l.sfles", 32,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* l.sfgtui $rA,${uimm-16} */
+/* l.sfgtui $rA,$lo16 */
   {
     OR1K_INSN_L_SFGTUI, "l-sfgtui", "l.sfgtui", 32,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* l.sfgeui $rA,${uimm-16} */
+/* l.sfgeui $rA,$lo16 */
   {
     OR1K_INSN_L_SFGEUI, "l-sfgeui", "l.sfgeui", 32,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* l.sfltui $rA,${uimm-16} */
+/* l.sfltui $rA,$lo16 */
   {
     OR1K_INSN_L_SFLTUI, "l-sfltui", "l.sfltui", 32,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* l.sfleui $rA,${uimm-16} */
+/* l.sfleui $rA,$lo16 */
   {
     OR1K_INSN_L_SFLEUI, "l-sfleui", "l.sfleui", 32,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
@@ -659,7 +669,7 @@ static const CGEN_IBASE or1k_cgen_insn_table[MAX_INSNS] =
     OR1K_INSN_L_SFEQ, "l-sfeq", "l.sfeq", 32,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* l.sfeqi $rA,${simm-16} */
+/* l.sfeqi $rA,$lo16 */
   {
     OR1K_INSN_L_SFEQI, "l-sfeqi", "l.sfeqi", 32,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
@@ -669,7 +679,7 @@ static const CGEN_IBASE or1k_cgen_insn_table[MAX_INSNS] =
     OR1K_INSN_L_SFNE, "l-sfne", "l.sfne", 32,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* l.sfnei $rA,${simm-16} */
+/* l.sfnei $rA,$lo16 */
   {
     OR1K_INSN_L_SFNEI, "l-sfnei", "l.sfnei", 32,
     { 0, { { { (1<<MACH_BASE), 0 } } } }

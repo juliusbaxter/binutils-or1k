@@ -108,7 +108,7 @@ static const CGEN_IFMT ifmt_l_sfgtu ATTRIBUTE_UNUSED = {
 };
 
 static const CGEN_IFMT ifmt_l_sfgtui ATTRIBUTE_UNUSED = {
-  32, 32, 0xffe00000, { { F (F_OPCODE) }, { F (F_OP_25_5) }, { F (F_R2) }, { F (F_UIMM16) }, { 0 } }
+  32, 32, 0xffe00000, { { F (F_OPCODE) }, { F (F_OP_25_5) }, { F (F_R2) }, { F (F_LO16) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_l_sfgtsi ATTRIBUTE_UNUSED = {
@@ -376,6 +376,18 @@ static const CGEN_OPCODE or1k_cgen_insn_opcode_table[MAX_INSNS] =
     { { MNEM, ' ', OP (RD), ',', OP (RA), ',', OP (RB), 0 } },
     & ifmt_l_add, { 0xe000030a }
   },
+/* l.ff1 $rD,$rA */
+  {
+    { 0, 0, 0, 0 },
+    { { MNEM, ' ', OP (RD), ',', OP (RA), 0 } },
+    & ifmt_l_add, { 0xe000000f }
+  },
+/* l.fl1 $rD,$rA */
+  {
+    { 0, 0, 0, 0 },
+    { { MNEM, ' ', OP (RD), ',', OP (RA), 0 } },
+    & ifmt_l_add, { 0xe000010f }
+  },
 /* l.addi $rD,$rA,$lo16 */
   {
     { 0, 0, 0, 0 },
@@ -460,28 +472,28 @@ static const CGEN_OPCODE or1k_cgen_insn_opcode_table[MAX_INSNS] =
     { { MNEM, ' ', OP (RA), ',', OP (RB), 0 } },
     & ifmt_l_sfgtu, { 0xe5a00000 }
   },
-/* l.sfgtui $rA,${uimm-16} */
+/* l.sfgtui $rA,$lo16 */
   {
     { 0, 0, 0, 0 },
-    { { MNEM, ' ', OP (RA), ',', OP (UIMM_16), 0 } },
+    { { MNEM, ' ', OP (RA), ',', OP (LO16), 0 } },
     & ifmt_l_sfgtui, { 0xbc400000 }
   },
-/* l.sfgeui $rA,${uimm-16} */
+/* l.sfgeui $rA,$lo16 */
   {
     { 0, 0, 0, 0 },
-    { { MNEM, ' ', OP (RA), ',', OP (UIMM_16), 0 } },
+    { { MNEM, ' ', OP (RA), ',', OP (LO16), 0 } },
     & ifmt_l_sfgtui, { 0xbc600000 }
   },
-/* l.sfltui $rA,${uimm-16} */
+/* l.sfltui $rA,$lo16 */
   {
     { 0, 0, 0, 0 },
-    { { MNEM, ' ', OP (RA), ',', OP (UIMM_16), 0 } },
+    { { MNEM, ' ', OP (RA), ',', OP (LO16), 0 } },
     & ifmt_l_sfgtui, { 0xbc800000 }
   },
-/* l.sfleui $rA,${uimm-16} */
+/* l.sfleui $rA,$lo16 */
   {
     { 0, 0, 0, 0 },
-    { { MNEM, ' ', OP (RA), ',', OP (UIMM_16), 0 } },
+    { { MNEM, ' ', OP (RA), ',', OP (LO16), 0 } },
     & ifmt_l_sfgtui, { 0xbca00000 }
   },
 /* l.sfgtsi $rA,${simm-16} */
@@ -514,11 +526,11 @@ static const CGEN_OPCODE or1k_cgen_insn_opcode_table[MAX_INSNS] =
     { { MNEM, ' ', OP (RA), ',', OP (RB), 0 } },
     & ifmt_l_sfgtu, { 0xe4000000 }
   },
-/* l.sfeqi $rA,${simm-16} */
+/* l.sfeqi $rA,$lo16 */
   {
     { 0, 0, 0, 0 },
-    { { MNEM, ' ', OP (RA), ',', OP (SIMM_16), 0 } },
-    & ifmt_l_sfgtsi, { 0xbc000000 }
+    { { MNEM, ' ', OP (RA), ',', OP (LO16), 0 } },
+    & ifmt_l_sfgtui, { 0xbc000000 }
   },
 /* l.sfne $rA,$rB */
   {
@@ -526,11 +538,11 @@ static const CGEN_OPCODE or1k_cgen_insn_opcode_table[MAX_INSNS] =
     { { MNEM, ' ', OP (RA), ',', OP (RB), 0 } },
     & ifmt_l_sfgtu, { 0xe4200000 }
   },
-/* l.sfnei $rA,${simm-16} */
+/* l.sfnei $rA,$lo16 */
   {
     { 0, 0, 0, 0 },
-    { { MNEM, ' ', OP (RA), ',', OP (SIMM_16), 0 } },
-    & ifmt_l_sfgtsi, { 0xbc200000 }
+    { { MNEM, ' ', OP (RA), ',', OP (LO16), 0 } },
+    & ifmt_l_sfgtui, { 0xbc200000 }
   },
 };
 
